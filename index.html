@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sala de cine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <!-- PANEL IZQUIERDO -->
+    <div class="panel-izq">
+        <div class="movie-list" id="movieList">
+            <!-- Se generan en JS desde un arreglo -->
+        </div>
+
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" placeholder="Ingresa tu nombre">
+
+        <label for="email">Email</label>
+        <input type="text" id="email" placeholder="Ingresa tu email">
+
+        <label for="asiento">Asiento</label>
+        <input type="number" id="asiento" readonly>
+
+        <label for="precio">Precio</label>
+        <input type="number" id="precio" readonly>
+
+        <button class="btn-guardar" id="btnGuardar">GUARDAR</button>
+    </div>
+
+    <!-- PANEL CENTRAL -->
+    <div class="panel-centro">
+        <div class="screen-title">PANTALLA</div>
+        <div class="screen-image" id="screenImage">
+            <img  id="central-poster">
+        </div>
+        <div class="room-title" id="movieTitleCenter">El teléfono descompuesto</div>
+        <div id="movieTimeCenter">2:00 pm</div>
+
+        <div class="seats-grid" id="seatsGrid">
+            <!-- Asientos generados con JS -->
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color legend-sel"></div> Seleccionado
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-dis"></div> Disponible
+            </div>
+            <div class="legend-item">
+                <div class="legend-color legend-ocu"></div> Ocupado
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL DERECHO -->
+    <div class="panel-der">
+        <div class="alerta" id="alerta">
+            <div class="alerta-title">Seleccione un asiento</div>
+        
+        </div>
+    </div>
+</div>
+
+<script src="cine.js"></script>
+</body>
+</html>
