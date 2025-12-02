@@ -12,9 +12,9 @@ function crearAsientos() {
     return seats;
 }
 
-// Cada película tiene su PROPIO arreglo de asientos
+
 const movies = [
-    { id: 1, title: "El Teléfono Negro 2", time: "2:00 PM", price: 80, posterCentral: "poster_central_telneg.jpg" ,imagen: "poster_telefono_negro.jpg", seats: crearAsientos() },
+    { id: 1, title: "El Teléfono Negro 2", time: "2:00 PM", price: 80, posterCentral: "{{url_for('static',filename='/images/poster_central_telneg.jpg')}}" ,imagen: "poster_telefono_negro.jpg", seats: crearAsientos() },
     { id: 2, title: "PAW PATROL: ESPECIAL DE NAVIDAD", time: "5:00 PM", posterCentral: "poster_central_pawpatrol.jpg", price: 75, seats: crearAsientos(), imagen: "paw_patrol_70px.jpg" },
     { id: 3, title: "A pesar de ti", time: "8:00 PM", price: 70, seats: crearAsientos(), posterCentral: "poster_central_apesardeti.jpg", imagen: "poster_apesardeti.jpg" }
 ];
@@ -141,6 +141,9 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
         alert("Primero selecciona un asiento.");
         return;
     }
+
+    
+
     const nombre = document.getElementById("nombre").value.trim();
     if (!nombre) {
         alert("Ingresa un nombre para completar la reserva.");
@@ -158,8 +161,38 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
     selectedSeat.nombre = nombre;
 
     alert(`Reserva guardada:\n${nombre} - Asiento ${selectedSeat.num}\nPelícula: ${currentMovie.title}`);
-
+    const numeroAsiento = selectedSeat.num
     selectedSeat = null;
+
+    fetch("/save_cliente", {
+        method : "POST",
+        headers : {"Content-Type" :  "application/json"},
+        body: JSON.stringify({
+            nombre: nombre,
+            email: email,
+            asiento: numeroAsiento
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            return Promise.reject();
+        }
+    })
+    .then(result => {
+        if (result.success) {
+            alert("El registro se guardo de manera correcta")
+        } else{
+            alert("El registro no se pudo guardar correctamnte")
+        }
+    })
+    .catch(error => {
+        console.error("Error: ", error)
+    })
+
+    //TODO agregar boton de eliminar
+
     document.getElementById("asiento").value = "";
     document.getElementById("nombre").value = "";
     document.getElementById("email").value = "";

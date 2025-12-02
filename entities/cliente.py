@@ -13,8 +13,8 @@ class Cliente:
             connection = get_connection()
             cursor = connection.cursor()
             
-            query = "INSERT INTO clientes (nombre, email, asiento) VALUES (%s,%s,%d)"
-            cursor.execute(query, (self.name, self.email, self.asiento))
+            query = "INSERT INTO clientes (nombre, email, asiento) VALUES (%s,%s,%s);"
+            cursor.execute(query, (self.nombre, self.email, self.asiento))
             connection.commit()
             
             self.id = cursor.lastrowid
@@ -27,4 +27,23 @@ class Cliente:
             connection.close()
     
     
-    #TODO haz el delete
+    def delete(self):
+        try:
+            connection = get_connection()
+            cursor = connection.cursor()
+            
+            query = "DELETE FROM clientes WHERE id = %d)"
+            cursor.execute(query, (self.id))
+            connection.commit()
+            
+            #self.id = cursor.lastrowid
+            return self.id
+        except Exception as ex:
+            print("No se pudo guardar el registro correctamente: ", ex)
+            return 0
+        finally:
+            cursor.close()
+            connection.close()
+    
+    
+    

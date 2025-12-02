@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Sala de cine</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='/styles/styles.css')}}">
 </head>
 <body>
 <div class="container">
@@ -63,6 +63,6 @@
     </div>
 </div>
 
-<script src="cine.js"></script>
+<script src="{{url_for('static', filename='/js/cine.js')}}"></script>
 </body>
 </html>
