@@ -16,7 +16,7 @@ class Asiento:
             connection = get_connection()
             cursor = connection.cursor()
             
-            query = "INSERT INTO asientos (pelicula, nombre_cliente,numero,estado) VALUES (%s,%s,%d,%s);"
+            query = "INSERT INTO asientos (pelicula, nombre_cliente,numero,estado) VALUES (%s,%s,%s,%s);"
             cursor.execute(query, (self.pelicula, self.nombre_cliente, self.numero, self.estado ))
             connection.commit()
             

@@ -1,22 +1,25 @@
-/************   ESTRUCTURA DE DATOS   ************/
-// Función para crear el arreglo de 16 asientos disponibles
+/************   ESTRUCTURAS DE DATOS   ************/
 function crearAsientos() {
     const seats = [];
     for (let i = 1; i <= 16; i++) {
+        
         seats.push({
-            num: i,
+            num: i.toString(),
             status: "disponible", // "disponible" | "ocupado"
-            nombre: null
+            nombre: null,
+            iteracion: 0
         });
     }
+
     return seats;
+
 }
 
 
 const movies = [
-    { id: 1, title: "El Teléfono Negro 2", time: "2:00 PM", price: 80, posterCentral: "{{url_for('static',filename='/images/poster_central_telneg.jpg')}}" ,imagen: "poster_telefono_negro.jpg", seats: crearAsientos() },
-    { id: 2, title: "PAW PATROL: ESPECIAL DE NAVIDAD", time: "5:00 PM", posterCentral: "poster_central_pawpatrol.jpg", price: 75, seats: crearAsientos(), imagen: "paw_patrol_70px.jpg" },
-    { id: 3, title: "A pesar de ti", time: "8:00 PM", price: 70, seats: crearAsientos(), posterCentral: "poster_central_apesardeti.jpg", imagen: "poster_apesardeti.jpg" }
+    { id: 1, letra:"A", title: "El Teléfono Negro 2", time: "2:00 PM", price: 80, posterCentral: "{{url_for('static',filename='/images/poster_central_telneg.jpg')}}" ,imagen: "poster_telefono_negro.jpg", seats: crearAsientos() },
+    { id: 2, letra:"B", title: "PAW PATROL: ESPECIAL DE NAVIDAD", time: "5:00 PM", posterCentral: "poster_central_pawpatrol.jpg", price: 75, seats: crearAsientos(), imagen: "paw_patrol_70px.jpg" },
+    { id: 3, letra:"C", title: "A pesar de ti", time: "8:00 PM", price: 70, seats: crearAsientos(), posterCentral: "poster_central_apesardeti.jpg", imagen: "poster_apesardeti.jpg" }
 ];
 
 let currentMovie = movies[0];   // película seleccionada
@@ -93,6 +96,12 @@ function renderSeats() {
     seats.forEach(seat => {
         const div = document.createElement("div");
         div.classList.add("seat");
+        //seat.num += currentMovie.letra;
+
+        if (seat.iteracion != 1){
+        seat.num = seat.num + currentMovie.letra;
+        seat.iteracion++;
+        }
         div.textContent = seat.num;
 
         if (seat.status === "ocupado") {
@@ -159,6 +168,7 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
     // marcamos ocupado SOLO en la película actual
     selectedSeat.status = "ocupado";
     selectedSeat.nombre = nombre;
+    const pelicula = currentMovie.title;
 
     alert(`Reserva guardada:\n${nombre} - Asiento ${selectedSeat.num}\nPelícula: ${currentMovie.title}`);
     const numeroAsiento = selectedSeat.num
@@ -170,7 +180,9 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
         body: JSON.stringify({
             nombre: nombre,
             email: email,
-            asiento: numeroAsiento
+            asiento: numeroAsiento,
+            //pelicula: pelicula,
+            
         })
     })
     .then(response => {
@@ -190,6 +202,8 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
     .catch(error => {
         console.error("Error: ", error)
     })
+
+
 
     //TODO agregar boton de eliminar
 

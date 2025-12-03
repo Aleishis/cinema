@@ -15,11 +15,13 @@ def save_cliente():
     
     cliente = Cliente(id=0, nombre=data['nombre'], email=data['email'], asiento=data['asiento'])
     
+    
     cliente.save()
     if cliente.id == 0:
         return jsonify({"success":True, "id":cliente.id}), 201
     else:
         return jsonify({"success" : False,}), 500
+
 
 
 if __name__ == "__main__":
