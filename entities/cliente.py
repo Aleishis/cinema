@@ -69,3 +69,21 @@ class Cliente:
         finally:
             cursor.close()
             connection.close()
+    
+    @classmethod
+    def cliente_update(cls,id,nombre,email,asiento,pelicula):
+        
+        try:
+            connection = get_connection()
+            cursor = connection.cursor()
+            
+            query = "UPDATE clientes SET nombre = %s, email = %s, asiento = %s, pelicula = %s WHERE id = %s"
+            cursor.execute(query, (nombre, email, asiento, pelicula, id))
+            connection.commit()
+            
+        except Exception as ex:
+            print("Error al actualizar", ex)
+        finally:
+            cursor.close()
+            connection.close()
+            

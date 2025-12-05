@@ -37,9 +37,17 @@ def eliminar(id):
 
     return redirect(url_for('mostrar_clientes'))
 
-@app.route('/editar/<int:id>')
-def editar():
-    pass
+@app.route('/editar/<int:id>', methods=['POST'])
+def editar(id):
+    
+    nombre = request.form['nombre']
+    email = request.form['email']
+    asiento = request.form['asiento']
+    pelicula = request.form['pelicula']
+    
+    Cliente.cliente_update(id=id, nombre=nombre,email=email,asiento=asiento,pelicula=pelicula)
+    
+    return redirect(url_for('mostrar_clientes'))
 
 if __name__ == "__main__":
     app.run(port=5079, host='0.0.0.0')
