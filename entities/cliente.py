@@ -28,18 +28,18 @@ class Cliente:
             cursor.close()
             connection.close()
     
-    
-    def delete(self):
+    @classmethod
+    def delete(cls, id_cliente):
         try:
             connection = get_connection()
             cursor = connection.cursor()
             
-            query = "DELETE FROM clientes WHERE id = %d)"
-            cursor.execute(query, (self.id))
+            query = "DELETE FROM clientes WHERE id = %s"
+            cursor.execute(query, (id_cliente,))
             connection.commit()
             
             #self.id = cursor.lastrowid
-            return self.id
+            
         except Exception as ex:
             print("No se pudo guardar el registro correctamente: ", ex)
             return 0
@@ -55,7 +55,7 @@ class Cliente:
             connection = get_connection()
             cursor = connection.cursor()
             
-            query = "SELECT id, nombre, email, asiento, pelicula FROM clientes ORDER BY asiento;"
+            query = "SELECT id, nombre, email, asiento, pelicula FROM clientes ORDER BY asiento DESC;"
             cursor.execute(query)
             
             rows = cursor.fetchall()      

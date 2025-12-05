@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template, jsonify, redirect, url_for
 from entities.asiento import Asiento
 from entities.cliente import Cliente
 
@@ -28,6 +28,18 @@ def save_cliente():
 def mostrar_clientes():
     
     return render_template('lista_clientes.html', clientes=Cliente.get_all())
+
+@app.route("/eliminar/<int:id>")
+def eliminar(id):
+    
+    Asiento.delete(id)
+    Cliente.delete(id)
+
+    return redirect(url_for('mostrar_clientes'))
+
+@app.route('/editar/<int:id>')
+def editar():
+    pass
 
 if __name__ == "__main__":
     app.run(port=5079, host='0.0.0.0')

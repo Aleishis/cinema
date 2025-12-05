@@ -205,3 +205,18 @@ input[readonly] {
     font-weight: bold;
     margin-bottom: 5px;
 }
+
+header a{
+    font-weight: bold;
+    color: black;
+    font-size: 180%;
+    text-decoration: none;
+    margin: 5px 10px;
+    text-align: center;
+    background-color: aliceblue;
+}
+
+header{
+    text-align: center;
+    background-color: aliceblue;
+}

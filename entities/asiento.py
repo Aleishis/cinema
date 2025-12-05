@@ -30,17 +30,16 @@ class Asiento:
             cursor.close()
             connection.close()
     
-    
-    def delete(self):
+    @classmethod
+    def delete(cls, id):
         try:
             connection = get_connection()
             cursor = connection.cursor()
             
-            query = "DELETE FROM asientos WHERE id = %d"
-            cursor.execute(query, (self.id))
+            query = "DELETE FROM asientos WHERE cliente_id = %s"
+            cursor.execute(query, (id))
             connection.commit()
             
-            return self.id
         except Exception as ex:
             print("El registro no se pudo eliminar correctamente")
             return 0
