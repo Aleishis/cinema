@@ -6,7 +6,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    
+    clientes = Cliente.get_all()
+    ocupados = [cliente.asiento for cliente in clientes]
+    
+    
+    return render_template('index.html', ocupados=ocupados)
 
 @app.route('/save_cliente', methods=['POST'])
 def save_cliente():

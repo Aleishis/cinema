@@ -41,7 +41,7 @@ class Asiento:
             connection.commit()
             
         except Exception as ex:
-            print("El registro no se pudo eliminar correctamente")
+            print("El registro no se pudo eliminar correctamente", ex)
             return 0
         finally:
             cursor.close()

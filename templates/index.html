@@ -1,5 +1,7 @@
 {%include 'header.html'%}
 
+
+
 <script>
     const posterCentralTelneg = "{{url_for('static', filename='images/poster_central_telneg.jpg')}}";
     const posterCentralApesardeti = "{{url_for('static', filename='images/poster_central_apesardeti.jpg')}}";
@@ -7,13 +9,20 @@
     const posterTelneg = "{{url_for('static', filename='images/poster_telefono_negro.jpg')}}";
     const posterPawpatrol = "{{url_for('static', filename='images/paw_patrol_70px.jpg')}}";
     const posterApesardeti = "{{url_for('static', filename='images/poster_apesardeti.jpg')}}";    
+
+    
 </script>
 
+<script>
+    const asientos_ocupados = {{ ocupados|tojson }};
+</script>
+
+
 <div class="container">
-    <!-- PANEL IZQUIERDO -->
+    <!--izquierda-->
     <div class="panel-izq">
         <div class="movie-list" id="movieList">
-            <!-- Se generan en JS desde un arreglo -->
+            <!-- peliculas -->
         </div>
 
         <label for="nombre">Nombre</label>
@@ -31,7 +40,7 @@
         <button class="btn-guardar" id="btnGuardar">GUARDAR</button>
     </div>
 
-    <!-- PANEL CENTRAL -->
+    <!-- panel central -->
     <div class="panel-centro">
         <div class="screen-title">PANTALLA</div>
         <div class="screen-image" id="screenImage">
@@ -41,7 +50,7 @@
         <div id="movieTimeCenter">2:00 pm</div>
 
         <div class="seats-grid" id="seatsGrid">
-            <!-- Asientos generados con JS -->
+            <!-- asientos -->
         </div>
 
         <div class="legend">
@@ -57,7 +66,7 @@
         </div>
     </div>
 
-    <!-- PANEL DERECHO -->
+    <!-- panel derecho -->
     <div class="panel-der">
         <div class="alerta" id="alerta">
             <div class="alerta-title">Seleccione un asiento</div>
@@ -66,7 +75,7 @@
     </div>
 </div>
 
-<script src="{{url_for('static', filename='/js/cine.js')}}"></script>
+<script src="{{url_for('static', filename='js/cine.js')}}"></script>
 
 </body>
 </html>

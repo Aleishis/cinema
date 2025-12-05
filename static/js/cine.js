@@ -1,7 +1,10 @@
 /************   ESTRUCTURAS DE DATOS   ************/
 function crearAsientos() {
+
     const seats = [];
     for (let i = 1; i <= 16; i++) {
+
+        
         
         seats.push({
             num: i.toString(),
@@ -37,13 +40,13 @@ function renderMovies() {
         if (movie.id === currentMovie.id) item.classList.add("active");
 
         item.addEventListener("click", () => {
-            currentMovie = movie;         // cambiamos de película
-            selectedSeat = null;          // limpiamos selección
+            currentMovie = movie;         
+            selectedSeat = null;          
             document.getElementById("asiento").value = "";
             document.getElementById("precio").value = movie.price;
             renderMovies();
             updateCenterMovie();
-            renderSeats();                // ahora mostramos los asientos de ESTA película
+            renderSeats();                
             
         });
 
@@ -86,12 +89,12 @@ function updateCenterMovie() {
         currentMovie.time.toLowerCase();
 }
 
-/************   ASIENTOS (panel central)   ************/
+/* panel central */
 const seatsGrid = document.getElementById("seatsGrid");
 
 function renderSeats() {
     seatsGrid.innerHTML = "";
-    const seats = currentMovie.seats;  // asientos de la película actual
+    const seats = currentMovie.seats;//asientos de la película actual
 
     seats.forEach(seat => {
         const div = document.createElement("div");
@@ -104,7 +107,11 @@ function renderSeats() {
         }
         div.textContent = seat.num;
 
-        if (seat.status === "ocupado") {
+        if (asientos_ocupados.includes(seat.num)){
+            seat.status = "ocupado"
+        }
+
+        if (seat.status == "ocupado") {
             div.classList.add("ocupado");
         } else if (selectedSeat && selectedSeat.num === seat.num) {
             div.classList.add("seleccionado");
@@ -144,7 +151,7 @@ function onSeatClick(seat) {
     renderSeats();
 }
 
-/************   BOTÓN GUARDAR   ************/
+/*boton guardar*/
 document.getElementById("btnGuardar").addEventListener("click", () => {
     if (!selectedSeat) {
         alert("Primero selecciona un asiento.");
@@ -165,7 +172,7 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
         return;
     }
 
-    // marcamos ocupado SOLO en la película actual
+    
     selectedSeat.status = "ocupado";
     selectedSeat.nombre = nombre;
     const pelicula = currentMovie.title;
@@ -214,7 +221,7 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
     renderSeats();
 });
 
-/************   INICIALIZAR INTERFAZ   ************/
+/*inicio de la aplicacion*/
 renderMovies();
 updateCenterMovie();
 document.getElementById("precio").value = currentMovie.price;
