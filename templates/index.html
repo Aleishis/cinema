@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Sala de cine</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='/styles/styles.css')}}">
-</head>
-<body>
+{%include 'header.html'%}
+
+<script>
+    const posterCentralTelneg = "{{url_for('static', filename='images/poster_central_telneg.jpg')}}";
+    const posterCentralApesardeti = "{{url_for('static', filename='images/poster_central_apesardeti.jpg')}}";
+    const posterCentralPawpatrol = "{{url_for('static', filename='images/poster_central_pawpatrol.jpg')}}";
+    const posterTelneg = "{{url_for('static', filename='images/poster_telefono_negro.jpg')}}";
+    const posterPawpatrol = "{{url_for('static', filename='images/paw_patrol_70px.jpg')}}";
+    const posterApesardeti = "{{url_for('static', filename='images/poster_apesardeti.jpg')}}";    
+</script>
+
 <div class="container">
     <!-- PANEL IZQUIERDO -->
     <div class="panel-izq">
@@ -64,5 +67,7 @@
 </div>
 
 <script src="{{url_for('static', filename='/js/cine.js')}}"></script>
+
 </body>
 </html>
+

@@ -17,9 +17,9 @@ function crearAsientos() {
 
 
 const movies = [
-    { id: 1, letra:"A", title: "El Teléfono Negro 2", time: "2:00 PM", price: 80, posterCentral: "{{url_for('static',filename='/images/poster_central_telneg.jpg')}}" ,imagen: "poster_telefono_negro.jpg", seats: crearAsientos() },
-    { id: 2, letra:"B", title: "PAW PATROL: ESPECIAL DE NAVIDAD", time: "5:00 PM", posterCentral: "poster_central_pawpatrol.jpg", price: 75, seats: crearAsientos(), imagen: "paw_patrol_70px.jpg" },
-    { id: 3, letra:"C", title: "A pesar de ti", time: "8:00 PM", price: 70, seats: crearAsientos(), posterCentral: "poster_central_apesardeti.jpg", imagen: "poster_apesardeti.jpg" }
+    { id: 1, letra:"A", title: "El Teléfono Negro 2", time: "2:00 PM", price: 80, posterCentral: posterCentralTelneg ,imagen: posterTelneg, seats: crearAsientos() },
+    { id: 2, letra:"B", title: "PAW PATROL: ESPECIAL DE NAVIDAD", time: "5:00 PM", posterCentral: posterCentralPawpatrol, price: 75, seats: crearAsientos(), imagen: posterPawpatrol},
+    { id: 3, letra:"C", title: "A pesar de ti", time: "8:00 PM", price: 70, seats: crearAsientos(), posterCentral: posterCentralApesardeti, imagen: posterApesardeti }
 ];
 
 let currentMovie = movies[0];   // película seleccionada
@@ -174,6 +174,8 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
     const numeroAsiento = selectedSeat.num
     selectedSeat = null;
 
+    
+
     fetch("/save_cliente", {
         method : "POST",
         headers : {"Content-Type" :  "application/json"},
@@ -181,8 +183,7 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
             nombre: nombre,
             email: email,
             asiento: numeroAsiento,
-            //pelicula: pelicula,
-            
+            pelicula: pelicula
         })
     })
     .then(response => {

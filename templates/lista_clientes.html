@@ -1,0 +1,33 @@
+{%include 'header.html'%}
+    <main>
+        <div>
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Asiento</th>
+                        <th>Pelicula</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for cliente in clientes%}
+                    <tr>
+                        <td>{{cliente.id}}</td>
+                        <td>{{cliente.nombre}}</td>
+                        <td>{{cliente.email}}</td>
+                        <td>{{cliente.asiento}}</td>
+                        <td>{{cliente.pelicula}}</td>
+                    </tr>
+                    {%else%}
+                    <tr>
+                        <td colspan="5">No hay registros disponibles</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

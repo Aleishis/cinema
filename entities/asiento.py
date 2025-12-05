@@ -2,10 +2,10 @@ from entities.db import get_connection
 
 class Asiento:
     
-    def __init__(self,id,pelicula,nombre_cliente,numero,estado):
+    def __init__(self,id,pelicula,id_cliente,numero,estado):
         self.id = id
         self.pelicula = pelicula
-        self.nombre_cliente = nombre_cliente
+        self.id_cliente = id_cliente
         self.numero = numero
         self.estado = estado
     
@@ -16,14 +16,15 @@ class Asiento:
             connection = get_connection()
             cursor = connection.cursor()
             
-            query = "INSERT INTO asientos (pelicula, nombre_cliente,numero,estado) VALUES (%s,%s,%s,%s);"
-            cursor.execute(query, (self.pelicula, self.nombre_cliente, self.numero, self.estado ))
+            self.id = int(self.id)
+            query = "INSERT INTO asientos (pelicula,cliente_id,numero,estado) VALUES (%s,%s,%s,%s);"
+            cursor.execute(query, (self.pelicula, self.id_cliente, self.numero, self.estado ))
             connection.commit()
             
             self.id = cursor.lastrowid
             return self.id
         except Exception as ex:
-            print("No se pudo guardar el registro correctamente")
+            print("No se pudo guardar el registro correctamente", ex)
             return 0
         finally:
             cursor.close()
